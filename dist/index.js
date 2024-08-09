@@ -29242,8 +29242,8 @@ async function run() {
         if (file) {
             body = (0, fs_1.readFileSync)(file, 'utf8');
         }
-        const preamble = `<!-- comment-id:${id} -->\n\n`;
-        const content = `${preamble}\n${title}\n\n${body}`;
+        const preamble = `<!-- comment-id:${id} -->`;
+        const content = `${preamble}\n# ${title}\n\n${body}`;
         // Create a new GitHub client
         const client = github.getOctokit(token);
         // find the comment with the preamble
