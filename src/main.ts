@@ -1,5 +1,6 @@
 import * as core from '@actions/core'
 import * as github from '@actions/github'
+import { readFileSync } from 'fs'
 
 /**
  * The main function for the action.
@@ -18,7 +19,12 @@ export async function run(): Promise<void> {
     const token = core.getInput('github-token', { required: true })
     const id = core.getInput('id', { required: true })
     const title = core.getInput('title')
-    const body = core.getInput('body')
+
+    const file = core.getInput('file')
+    let body = core.getInput('content') ?? ''
+    if (file) {
+      body = readFileSync(file, 'utf8')
+    }
 
     const preamble = `<!-- comment-id:${id} -->\n\n`
     const content = `${preamble}\n${title}\n\n${body}`

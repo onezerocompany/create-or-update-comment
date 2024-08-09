@@ -29220,6 +29220,7 @@ Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.run = run;
 const core = __importStar(__nccwpck_require__(2186));
 const github = __importStar(__nccwpck_require__(5438));
+const fs_1 = __nccwpck_require__(7147);
 /**
  * The main function for the action.
  * @returns {Promise<void>} Resolves when the action is complete.
@@ -29236,7 +29237,11 @@ async function run() {
         const token = core.getInput('github-token', { required: true });
         const id = core.getInput('id', { required: true });
         const title = core.getInput('title');
-        const body = core.getInput('body');
+        const file = core.getInput('file');
+        let body = core.getInput('content') ?? '';
+        if (file) {
+            body = (0, fs_1.readFileSync)(file, 'utf8');
+        }
         const preamble = `<!-- comment-id:${id} -->\n\n`;
         const content = `${preamble}\n${title}\n\n${body}`;
         // Create a new GitHub client

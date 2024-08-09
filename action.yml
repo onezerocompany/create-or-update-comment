@@ -12,7 +12,9 @@ inputs:
     default: 'created-comment'
   title:
     description: 'The title of the comment'
-  body:
+  file:
+    description: 'The file to read the content from'
+  content:
     description: 'The body of the comment'
 
 runs:
