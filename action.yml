@@ -1,0 +1,20 @@
+name: 'create-or-update-comment'
+description: 'Create or update a comment on a pull request'
+author: 'OneZero Company'
+
+inputs:
+  github-token:
+    description: 'The GitHub token'
+    required: true
+    default: ${{ github.token }}
+  id:
+    description: 'ID of the comment'
+    default: 'created-comment'
+  title:
+    description: 'The title of the comment'
+  body:
+    description: 'The body of the comment'
+
+runs:
+  using: node20
+  main: dist/index.js
